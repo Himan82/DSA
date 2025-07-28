@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 int BinarySearch(const vector<int>& v,int l,int r,int target){
-    if(l>r || l<0 || r>=v.size())return -1;
+    if(l>r)return -1;
     int mid=(l+r)/2;
     if(v[mid]==target)return mid;
     else if(v[mid]<target)return BinarySearch(v,mid+1,r,target);
