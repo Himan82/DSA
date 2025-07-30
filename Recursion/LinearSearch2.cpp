@@ -1,9 +1,18 @@
 #include<bits/stdc++.h>
 using namespace std;
-void Linear_Search(vector<int> &v,int target, int indx,vector<int>  &res){
-    if(indx==v.size())return;
-    if(v[indx]==target)res.push_back(indx);
-    Linear_Search(v,target,indx+1,res);
+vector<int> merge(const vector<int>& v1, const vector<int>& v2) {
+    vector<int> result;
+    result.reserve(v1.size() + v2.size()); 
+    result.insert(result.end(), v1.begin(), v1.end());
+    result.insert(result.end(), v2.begin(), v2.end());
+    return result;
+}
+vector<int> Linear_Search(vector<int> &v,int target, int indx){
+    vector<int>res;
+    if(indx==v.size())return res;
+    if(v[indx]==target)res.push_back(indx); 
+    vector<int>prev= Linear_Search(v,target,indx+1);
+   return  merge(prev,res);
 }
 int main(){
     int n;
@@ -16,7 +25,7 @@ int main(){
     cin>>target;
     vector<int>res;
     int indx=0;
-    Linear_Search(v,target,indx,res);
+   res=Linear_Search(v,target,indx);
     for(int i=0;i<res.size();i++){
         cout<<res[i]<<" ";
     }
