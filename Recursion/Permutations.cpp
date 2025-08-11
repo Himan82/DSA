@@ -1,22 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-void Permutations(string & s, vector<string> & v,int count,string & t){
-    if(count==s.size()){
-        v.push_back(t);
+void Permutations(string & s, vector<string> & v,int pos){
+    if(pos==s.size()){
+        v.push_back(s);
         return ;
     }
-    if(t.size()==0){
-        t.push_back(s[count]);
-        Permutations(s,v,count+1,t);
-    }
-    else{
-        char c=s[count];
-        string curr=t;
-        for(int i=0;i<=curr.size();i++){
-            t=curr;
-            t.insert(i,1,c);
-            Permutations(s,v,count+1,t);
-        }
+    for(int i=pos;i<s.size();i++){
+        swap(s[pos],s[i]);
+        Permutations(s,v,pos+1);
+        swap(s[pos],s[i]);
     }
 }
 int main(){
@@ -24,8 +16,7 @@ int main(){
     cin>>s;
     sort(s.begin(),s.end());
     vector<string>v;
-    string t;
-    Permutations(s,v,0,t);
+    Permutations(s,v,0);
     for(int i=0;i<v.size();i++)cout<<v[i]<<" ";
     return 0;
 }
